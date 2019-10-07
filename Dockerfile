@@ -12,6 +12,7 @@ RUN add-apt-repository \
 RUN apt-get update  -qq \
     && apt-get install docker-ce=17.12.1~ce-0~debian -y
 RUN usermod -aG docker jenkins
+RUN openssl s_client -showcerts -connect dev.misoboy.kr:443 < /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /etc/ssl/certs/ca-certificates.crt
 
 WORKDIR /root
 RUN curl -L -O "http://apache.tt.co.kr/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.tar.gz"
