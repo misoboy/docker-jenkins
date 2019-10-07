@@ -3,7 +3,11 @@ MAINTAINER ChiSeok, Song <misoboy.kor@gmail.com>
 
 USER root
 RUN apt-get -y update
-RUN apt-get -y install docker
+RUN apt-get -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian stretch stable"
+RUN apt-get -y update
+RUN apt-get -y install docker-ce
 
 WORKDIR /root
 RUN curl -L -O "http://apache.tt.co.kr/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.tar.gz"
